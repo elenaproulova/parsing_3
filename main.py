@@ -4,7 +4,7 @@ from googletrans import Translator
 
 
 translator = Translator()
-result = translator.translate
+
 
 # Создаём функцию, которая будет получать информацию
 def get_english_words():
@@ -35,19 +35,21 @@ def word_game():
         # Создаём функцию, чтобы использовать результат функции-словаря
         word_dict = get_english_words()
         word = word_dict.get("english_words")
+        translated_word = translator.translate(word, dest='ru').text
         word_definition = word_dict.get("word_definition")
+        translated_word_definition = translator.translate(word_definition, dest='ru').text
 
         # Начинаем игру
-        print(f"Значение слова - {word_definition}")
+        print(f"Значение слова - {translated_word_definition}")
         user = input("Что это за слово? ")
-        if user == word:
+        if user == translated_word:
             print("Все верно!")
         else:
-            print(f"Ответ неверный, было загадано это слово - {word}")
+            print(f"Ответ неверный, было загадано это слово - {translated_word} {word}")
 
         # Создаём возможность закончить игру
-        play_again = input("Хотите сыграть еще раз? y/n")
-        if play_again != "y":
+        play_again = input("Хотите сыграть еще раз? д/н")
+        if play_again != "д":
             print("Спасибо за игру!")
             break
 
